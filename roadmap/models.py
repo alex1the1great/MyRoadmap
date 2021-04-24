@@ -28,6 +28,7 @@ class Goal(models.Model):
 
 class Task(models.Model):
     title = models.CharField(max_length=255)
+    is_completed = models.BooleanField(default=False)
     deadline = models.DateTimeField(default=timezone.now, validators=[validate_deadline_is_not_past])
 
     parent_goal = models.ForeignKey(Goal, on_delete=models.CASCADE, related_name='tasks')
