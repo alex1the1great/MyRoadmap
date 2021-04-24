@@ -1,0 +1,18 @@
+{% extends 'roadmap/base.html' %}
+
+{% block title %}Goals list{% endblock title %}
+
+{% block content %}
+    <h2>{{ today_date }}</h2>
+    <p><a href="">Add a goal</a></p>
+    {% for goal in goals %}
+        <h3>{{ goal }} Deadline: {{ goal.deadline|date:"F j, Y" }}</h3>
+        {% for task in goal.tasks.all %}
+            <p>{{ task }}</p>
+        {% empty %}
+            <p>No tasks available yet.</p>
+        {% endfor %}
+    {% empty %}
+        <h3>No goals available yet.</h3>
+    {% endfor %}
+{% endblock content %}
