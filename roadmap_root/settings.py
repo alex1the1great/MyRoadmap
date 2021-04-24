@@ -45,6 +45,7 @@ BUILT_IN_APPS = [
 
 LOCAL_APPS = [
     'accounts.apps.AccountsConfig',
+    'roadmap.apps.RoadmapConfig',
 ]
 
 THIRD_PARTY_APPS = []
