@@ -1,0 +1,12 @@
+{% extends 'roadmap/base.html' %}
+
+{% block title %}Goal Add{% endblock title %}
+
+{% block content %}
+    <h1>Goal Add</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Add Goal</button>
+    </form>
+{% endblock content %}
