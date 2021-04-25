@@ -7,7 +7,8 @@
     <p><a href="{% url 'goal_add' %}">Add a goal</a></p>
     {% for goal in goals %}
         <h3>{{ goal }} Deadline: {{ goal.deadline|date:"F j, Y" }}</h3>
-        <p><a href="{% url 'goal_update' goal.slug %}">Update</a></p>
+        <p><a href="{% url 'goal_update' goal.slug %}">Update</a> |
+        <a href="{% url 'goal_delete' goal.slug %}">Delete</a></p>
         {% for task in goal.tasks.all %}
             <p>{{ task }}</p>
         {% empty %}

@@ -40,3 +40,10 @@ def goal_update(request, slug):
             form.save()
             return redirect('goal_list')
     return render(request, 'roadmap/goal_update.html', {'form': form})
+
+
+@login_required()
+def goal_delete(request, slug):
+    goal = get_object_or_404(Goal, slug=slug)
+    goal.delete()
+    return redirect('goal_list')
