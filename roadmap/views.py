@@ -9,7 +9,7 @@ from .forms import GoalForm
 
 @login_required()
 def goal_list(request):
-    goals = Goal.objects.all()
+    goals = Goal.objects.filter(user=request.user)
     today_date = timezone.now()
     return render(request, 'roadmap/goal_list.html', {'goals': goals, 'today_date': today_date})
 
