@@ -15,6 +15,8 @@
         <p><a href="{% url 'goal_update' goal.slug %}">Update</a> |
         <a href="{% url 'goal_delete' goal.slug %}">Delete</a></p>
 
+        <p><a href="{% url 'task_add' goal.slug %}">Add a task</a></p>
+
         {% for task in goal.tasks.all %}
             <p>{{ task }}</p>
         {% empty %}

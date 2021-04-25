@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.template.defaultfilters import slugify
 
 from .models import Goal
-from .forms import GoalForm
+from .forms import GoalForm, TaskForm
 
 
 @login_required()
@@ -57,3 +57,17 @@ def goal_index(request):
         return redirect('goal_list')
     else:
         return render(request, 'roadmap/goal_index.html')
+
+
+@login_required()
+def task_add(request, slug):
+    goal = get_object_or_404(Goal, slug=slug)
+    form = TaskForm
+    if request.method == 'POST':
+        form = TaskForm(request.POST)
+        if form.is_valid():
+            task = form.save(commit=False)
+            task.parent_goal = goal
+            task.save()
+            return redirect('goal_list')
+    return render(request, 'roadmap/task_add.html', {'form': form, 'goal': goal})
