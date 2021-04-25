@@ -18,7 +18,7 @@
         <p><a href="{% url 'task_add' goal.slug %}">Add a task</a></p>
 
         {% for task in goal.tasks.all %}
-            <p>{{ task }}</p>
+            <p>{{ task }} -- <a href="{% url 'task_delete' slug=goal.slug task_id=task.id %}">Delete</a></p>
         {% empty %}
             <p>No tasks available yet.</p>
         {% endfor %}

@@ -3,7 +3,7 @@ from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 from django.template.defaultfilters import slugify
 
-from .models import Goal
+from .models import Goal, Task
 from .forms import GoalForm, TaskForm
 
 
@@ -71,3 +71,10 @@ def task_add(request, slug):
             task.save()
             return redirect('goal_list')
     return render(request, 'roadmap/task_add.html', {'form': form, 'goal': goal})
+
+
+@login_required()
+def task_delete(request, slug, task_id):
+    task = get_object_or_404(Task, parent_goal__slug=slug, pk=task_id)
+    task.delete()
+    return redirect('goal_list')
