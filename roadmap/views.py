@@ -47,3 +47,13 @@ def goal_delete(request, slug):
     goal = get_object_or_404(Goal, slug=slug)
     goal.delete()
     return redirect('goal_list')
+
+
+def goal_index(request):
+    """
+    Display public page to login or signup. If user is authenticated redirect to goal list template.
+    """
+    if request.user.is_authenticated:
+        return redirect('goal_list')
+    else:
+        return render(request, 'roadmap/goal_index.html')
