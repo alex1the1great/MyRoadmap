@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 from django.template.defaultfilters import slugify
@@ -27,3 +27,16 @@ def goal_add(request):
     else:
         form = GoalForm()
     return render(request, 'roadmap/goal_add.html', {'form': form})
+
+
+@login_required()
+def goal_update(request, slug):
+    goal = get_object_or_404(Goal, slug=slug)
+    form = GoalForm(instance=goal)
+
+    if request.method == 'POST':
+        form = GoalForm(request.POST, instance=goal)
+        if form.is_valid():
+            form.save()
+            return redirect('goal_list')
+    return render(request, 'roadmap/goal_update.html', {'form': form})

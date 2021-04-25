@@ -4,7 +4,7 @@ from .models import Goal
 
 
 class CustomDateTimeInput(forms.DateTimeInput):
-    input_type = 'date'
+    input_type = 'datetime-local'
 
 
 class GoalForm(forms.ModelForm):
